@@ -7,18 +7,18 @@ LDFLAGS = -lm
 all: sequential openmp_ver mpi_ver cuda_ver
 
 sequential: sequential.c
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+	$(CC) $(CFLAGS) -o bin/sequential $< $(LDFLAGS)
 
 openmp_ver: openmp_ver.c
-	$(CC) $(CFLAGS) -fopenmp -o $@ $< $(LDFLAGS)
+	$(CC) $(CFLAGS) -fopenmp -o bin/openmp_ver $< $(LDFLAGS)
 
 mpi_ver: mpi_ver.c
-	$(MPICC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+	$(MPICC) $(CFLAGS) -o bin/mpi_ver $< $(LDFLAGS)
 
 cuda_ver: cuda_ver.cu
-	$(NVCC) -O2 -o $@ $<
+	$(NVCC) -O2 -o bin/cuda_ver $<
 
 clean:
-	rm -f sequential openmp_ver mpi_ver cuda_ver *.exe
+	rm -rf bin/ *.exe
 
 .PHONY: all clean
